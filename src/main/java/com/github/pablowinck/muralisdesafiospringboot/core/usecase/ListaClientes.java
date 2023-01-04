@@ -1,6 +1,6 @@
 package com.github.pablowinck.muralisdesafiospringboot.core.usecase;
 
-import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ClienteDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ListaClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Cliente;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.mapper.ClienteMapper;
 import com.github.pablowinck.muralisdesafiospringboot.outbound.repository.ClienteRepository;
@@ -24,9 +24,9 @@ public class ListaClientes {
         this.clienteMapper = clienteMapper;
     }
 
-    public Page<ClienteDto> execute(Optional<String> nome, Pageable pageable) {
+    public Page<ListaClienteDto> execute(Optional<String> nome, Pageable pageable) {
         var clientePage = getClientePage(nome, pageable);
-        return clientePage.map(clienteMapper::toDto);
+        return clientePage.map(clienteMapper::toListaDto);
     }
 
     private Page<Cliente> getClientePage(Optional<String> nome, Pageable pageable) {

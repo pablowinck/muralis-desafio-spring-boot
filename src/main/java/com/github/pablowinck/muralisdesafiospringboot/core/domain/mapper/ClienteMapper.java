@@ -1,6 +1,6 @@
 package com.github.pablowinck.muralisdesafiospringboot.core.domain.mapper;
 
-import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ClienteDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ListaClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Cliente;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,5 +14,5 @@ public interface ClienteMapper {
     @Mapping(target = "complemento", source = "endereco.complemento")
     @Mapping(target = "bairro", source = "endereco.bairro")
     @Mapping(target = "estado", source = "endereco.estado")
-    ClienteDto toDto(Cliente cliente);
+    ListaClienteDto toListaDto(Cliente cliente);
 }

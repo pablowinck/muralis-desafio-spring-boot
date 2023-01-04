@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ClienteDto {
+public class ListaClienteDto {
     private Integer id;
     @NotNull(message = "O campo 'nome' é obrigatório")
     private String nome;
