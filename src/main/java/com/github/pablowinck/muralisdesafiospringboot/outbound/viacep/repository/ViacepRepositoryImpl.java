@@ -3,9 +3,12 @@ package com.github.pablowinck.muralisdesafiospringboot.outbound.viacep.repositor
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ViacepDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.repository.ViacepRepository;
 import com.github.pablowinck.muralisdesafiospringboot.outbound.viacep.client.ViacepClient;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -18,10 +21,18 @@ public class ViacepRepositoryImpl implements ViacepRepository {
         this.viacepClient = viacepClient;
     }
 
-    public ViacepDto findByCep(String cep) {
+    @Override
+    @Retry(name = "viacep", fallbackMethod = "fallback")
+    public Optional<ViacepDto> findByCep(String cep) {
         log.info("Consultando CEP: {}", cep);
-        var viacepDto = viacepClient.getCep(cep);
+        Optional<ViacepDto> viacepDto;
+        viacepDto = Optional.of(viacepClient.getCep(cep));
         log.info("CEP consultado: {}", viacepDto);
         return viacepDto;
+    }
+
+    public Optional<ViacepDto> fallback(String cep, Exception ignoredEx) {
+        log.info("Erro ao consultar CEP: {} retornando vazio", cep);
+        return Optional.empty();
     }
 }

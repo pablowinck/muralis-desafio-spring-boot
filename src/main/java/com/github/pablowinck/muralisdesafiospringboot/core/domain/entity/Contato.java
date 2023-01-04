@@ -20,9 +20,4 @@ public class Contato {
     private String tipo;
 
     private String texto;
-
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
-
 }

@@ -5,14 +5,16 @@ import com.github.pablowinck.muralisdesafiospringboot.core.domain.repository.Via
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Profile("test")
 public class MemoryViacepRepository implements ViacepRepository {
 
 
     @Override
-    public ViacepDto findByCep(String cep) {
-        return ViacepDto.builder()
+    public Optional<ViacepDto> findByCep(String cep) {
+        return Optional.of(ViacepDto.builder()
                 .cep(cep)
                 .logradouro("Rua dos Bobos")
                 .complemento("de nº 0 até nº 100")
@@ -21,6 +23,6 @@ public class MemoryViacepRepository implements ViacepRepository {
                 .uf("SP")
                 .ibge("3550308")
                 .gia("1004")
-                .build();
+                .build());
     }
 }

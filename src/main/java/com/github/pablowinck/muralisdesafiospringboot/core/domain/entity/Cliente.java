@@ -31,7 +31,7 @@ public class Cliente {
     @Embedded
     private Endereco endereco;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Contato> contatos = new ArrayList<>();
 
     @Override
