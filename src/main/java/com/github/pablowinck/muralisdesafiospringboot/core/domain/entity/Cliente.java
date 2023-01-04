@@ -17,6 +17,7 @@ import java.util.Objects;
 @Table(name = "cliente", indexes = {
         @Index(name = "idx_nome", columnList = "nome"),
 })
+@ToString
 public class Cliente {
     @Id
     @GeneratedValue
@@ -32,6 +33,7 @@ public class Cliente {
     private Endereco endereco;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Contato> contatos = new ArrayList<>();
 
     @Override
