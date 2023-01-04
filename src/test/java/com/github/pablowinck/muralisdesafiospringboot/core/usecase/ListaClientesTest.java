@@ -35,7 +35,7 @@ class ListaClientesTest {
         var cliente = clienteRepository.save(ClienteGenerator.create());
         var clientes = listaClientes.execute(Optional.empty(), Pageable.unpaged());
         assertEquals(1, clientes.getTotalElements());
-        assertEquals(cliente, clientes.getContent().get(0));
+        assertEquals(cliente.getId(), clientes.getContent().get(0).getId());
     }
 
     @Test
@@ -45,7 +45,7 @@ class ListaClientesTest {
         clienteRepository.save(ClienteGenerator.create("aleatory-name"));
         var clientes = listaClientes.execute(Optional.of(cliente.getNome()), Pageable.unpaged());
         assertEquals(1, clientes.getTotalElements());
-        assertEquals(cliente, clientes.getContent().get(0));
+        assertEquals(cliente.getId(), clientes.getContent().get(0).getId());
     }
 
 }

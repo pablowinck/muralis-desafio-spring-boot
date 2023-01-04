@@ -33,8 +33,8 @@ public class Cliente {
     @Embedded
     private Endereco endereco;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
-    private List<Contato> contato = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
+    private List<Contato> contatos = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
