@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -21,7 +22,7 @@ import java.util.List;
 public class Cliente {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String nome;
@@ -34,4 +35,17 @@ public class Cliente {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
     private List<Contato> contato = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
