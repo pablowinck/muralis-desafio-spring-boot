@@ -1,6 +1,7 @@
 package com.github.pablowinck.muralisdesafiospringboot.core.usecase;
 
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ContatoDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.events.ClienteCadastradoEvent;
 import com.github.pablowinck.muralisdesafiospringboot.core.usecase.generators.ClienteGenerator;
 import com.github.pablowinck.muralisdesafiospringboot.outbound.repository.ClienteRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.event.ApplicationEvents;
+import org.springframework.test.context.event.RecordApplicationEvents;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,8 +20,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @SpringBootTest
 @ActiveProfiles("test")
+@RecordApplicationEvents
 class CadastraClienteTest {
 
     @Autowired
@@ -26,6 +31,9 @@ class CadastraClienteTest {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private ApplicationEvents applicationEvents;
 
     @BeforeEach
     void setUp() {
@@ -39,6 +47,9 @@ class CadastraClienteTest {
         cadastraCliente.execute(dto);
         var cliente = clienteRepository.findByNomeLikeIgnoreCase(dto.getNome(), Pageable.unpaged());
         assertTrue(cliente.hasContent());
+        List<ClienteCadastradoEvent> events = applicationEvents.stream(ClienteCadastradoEvent.class)
+                .toList();
+        assertEquals(1, events.size());
     }
 
     @Test
@@ -60,6 +71,9 @@ class CadastraClienteTest {
         var firstContato = contatos.get(0);
         assertEquals("email", firstContato.getTipo());
         assertEquals("john.doe@email.com", firstContato.getTexto());
+        List<ClienteCadastradoEvent> events = applicationEvents.stream(ClienteCadastradoEvent.class)
+                .toList();
+        assertEquals(1, events.size());
     }
 
 }
