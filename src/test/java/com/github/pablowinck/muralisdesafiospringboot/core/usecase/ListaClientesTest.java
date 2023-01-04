@@ -32,7 +32,7 @@ class ListaClientesTest {
     @Test
     @DisplayName("Deve listar todos os clientes")
     void deveListarTodosOsClientes() {
-        var cliente = clienteRepository.save(ClienteGenerator.create());
+        var cliente = clienteRepository.save(ClienteGenerator.generate());
         var clientes = listaClientes.execute(Optional.empty(), Pageable.unpaged());
         assertEquals(1, clientes.getTotalElements());
         assertEquals(cliente.getId(), clientes.getContent().get(0).getId());
@@ -41,8 +41,8 @@ class ListaClientesTest {
     @Test
     @DisplayName("Deve listar todos os clientes por nome")
     void deveListarTodosOsClientesPorNome() {
-        var cliente = clienteRepository.save(ClienteGenerator.create());
-        clienteRepository.save(ClienteGenerator.create("aleatory-name"));
+        var cliente = clienteRepository.save(ClienteGenerator.generate());
+        clienteRepository.save(ClienteGenerator.generate("aleatory-name"));
         var clientes = listaClientes.execute(Optional.of(cliente.getNome()), Pageable.unpaged());
         assertEquals(1, clientes.getTotalElements());
         assertEquals(cliente.getId(), clientes.getContent().get(0).getId());

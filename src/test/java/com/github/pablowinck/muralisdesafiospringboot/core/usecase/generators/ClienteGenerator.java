@@ -9,14 +9,14 @@ public class ClienteGenerator {
     private static final List<String> names = List.of("John Doe", "Jane Doe", "John Smith", "Jane Smith");
     private static final List<String> ceps = List.of("12345678", "98765432", "21436578", "89674532");
 
-    public static Cliente create() {
+    public static Cliente generate() {
         return Cliente.builder()
                 .nome(names.get(randomIndex(names.size())))
                 .endereco(Endereco.builder().cep(ceps.get(randomIndex(ceps.size()))).build())
                 .build();
     }
 
-    public static Cliente create(String nome) {
+    public static Cliente generate(String nome) {
         return Cliente.builder()
                 .nome(nome)
                 .endereco(Endereco.builder().cep(ceps.get(randomIndex(ceps.size()))).build())
