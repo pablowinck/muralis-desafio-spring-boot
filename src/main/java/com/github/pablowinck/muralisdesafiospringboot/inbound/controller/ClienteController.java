@@ -1,15 +1,15 @@
 package com.github.pablowinck.muralisdesafiospringboot.inbound.controller;
 
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.CadastraClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ListaClienteDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.usecase.CadastraCliente;
 import com.github.pablowinck.muralisdesafiospringboot.core.usecase.ConsultaCliente;
 import com.github.pablowinck.muralisdesafiospringboot.core.usecase.ListaClientes;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -18,10 +18,12 @@ import java.util.Optional;
 public class ClienteController {
     private final ListaClientes listaClientes;
     private final ConsultaCliente consultaCliente;
+    private final CadastraCliente cadastraCliente;
 
-    public ClienteController(ListaClientes listaClientes, ConsultaCliente consultaCliente) {
+    public ClienteController(ListaClientes listaClientes, ConsultaCliente consultaCliente, CadastraCliente cadastraCliente) {
         this.listaClientes = listaClientes;
         this.consultaCliente = consultaCliente;
+        this.cadastraCliente = cadastraCliente;
     }
 
     @GetMapping
@@ -32,5 +34,11 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<ListaClienteDto> consulta(@PathVariable Integer id) {
         return ResponseEntity.ok(consultaCliente.execute(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> cadastra(@RequestBody @Valid CadastraClienteDto dto) {
+        cadastraCliente.execute(dto);
+        return ResponseEntity.ok().build();
     }
 }
