@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class ConsultaCepClienteTest {
+class MapeiaEnderecoPeloCepClienteTest {
 
     @Autowired
     private CadastraCliente cadastraCliente;

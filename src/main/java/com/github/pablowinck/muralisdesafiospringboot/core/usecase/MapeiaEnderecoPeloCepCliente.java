@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Log4j2
-public class ConsultaCepCliente {
+public class MapeiaEnderecoPeloCepCliente {
 
     private final ViacepRepository viacepRepository;
     private final ClienteMapper clienteMapper;
     private final ClienteRepository clienteRepository;
 
-    public ConsultaCepCliente(ViacepRepository viacepRepository, ClienteMapper clienteMapper, ClienteRepository clienteRepository) {
+    public MapeiaEnderecoPeloCepCliente(ViacepRepository viacepRepository, ClienteMapper clienteMapper, ClienteRepository clienteRepository) {
         this.viacepRepository = viacepRepository;
         this.clienteMapper = clienteMapper;
         this.clienteRepository = clienteRepository;
