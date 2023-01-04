@@ -2,11 +2,15 @@ package com.github.pablowinck.muralisdesafiospringboot.core.domain.mapper;
 
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.CadastraClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ListaClienteDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ViacepDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Cliente;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Endereco;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ClienteMapper {
     @Mapping(target = "cep", source = "endereco.cep")
     @Mapping(target = "logradouro", source = "endereco.logradouro")
@@ -25,4 +29,8 @@ public interface ClienteMapper {
     @Mapping(source = "bairro", target = "endereco.bairro")
     @Mapping(source = "estado", target = "endereco.estado")
     Cliente toEntity(CadastraClienteDto dto);
+
+    @Mapping(source = "localidade", target = "cidade")
+    @Mapping(source = "uf", target = "estado")
+    Endereco mapViacepDtoToEndereco(@MappingTarget Endereco endereco, ViacepDto viacepDto);
 }
