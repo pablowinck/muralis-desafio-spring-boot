@@ -23,10 +23,9 @@ public class ViacepRepositoryImpl implements ViacepRepository {
 
     @Override
     @Retry(name = "viacep", fallbackMethod = "fallback")
-    public Optional<ViacepDto> findByCep(String cep) {
+    public ViacepDto findBy(String cep) {
         log.info("Consultando CEP: {}", cep);
-        Optional<ViacepDto> viacepDto;
-        viacepDto = Optional.of(viacepClient.getCep(cep));
+        var viacepDto = viacepClient.getEnderecoBy(cep);
         log.info("CEP consultado: {}", viacepDto);
         return viacepDto;
     }

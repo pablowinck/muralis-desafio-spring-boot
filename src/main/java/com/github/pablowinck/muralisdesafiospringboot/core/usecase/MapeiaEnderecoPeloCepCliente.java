@@ -40,9 +40,8 @@ public class MapeiaEnderecoPeloCepCliente {
     private void execute(Cliente cliente) {
         log.info("Preenchendo endereco do cliente {} pelo CEP: {}", cliente.getId(), cliente.getEndereco().getCep());
         var cep = cliente.getEndereco().getCep();
-        var viacepDto = viacepRepository.findByCep(cep);
-        if(viacepDto.isEmpty()) return;
-        var endereco = clienteMapper.mapViacepDtoToEndereco(cliente.getEndereco(), viacepDto.get());
+        var viacepDto = viacepRepository.findBy(cep);
+        var endereco = clienteMapper.mapViacepDtoToEndereco(cliente.getEndereco(), viacepDto);
         cliente.setEndereco(endereco);
         clienteRepository.save(cliente);
         log.info("Endereco do cliente {} preenchido com sucesso", cliente.getId());
