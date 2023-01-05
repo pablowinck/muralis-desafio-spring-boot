@@ -1,6 +1,6 @@
 package com.github.pablowinck.muralisdesafiospringboot.core.usecase;
 
-import com.github.pablowinck.muralisdesafiospringboot.core.usecase.generators.ClienteGenerator;
+import com.github.pablowinck.muralisdesafiospringboot.core.generators.ClienteGenerator;
 import com.github.pablowinck.muralisdesafiospringboot.outbound.repository.ClienteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

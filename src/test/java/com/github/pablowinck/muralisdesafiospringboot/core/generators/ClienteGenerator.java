@@ -1,4 +1,4 @@
-package com.github.pablowinck.muralisdesafiospringboot.core.usecase.generators;
+package com.github.pablowinck.muralisdesafiospringboot.core.generators;
 
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.PersistClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Cliente;
