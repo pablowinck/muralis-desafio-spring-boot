@@ -33,12 +33,12 @@ public class ListaClientes {
         if (nome.isPresent()) {
             log.info("Listando clientes: nome '{}', pageable '{}'", nome, pageable);
             Page<Cliente> clientesByNome = clienteRepository.findByNomeLikeIgnoreCase(nome.get(), pageable);
-            log.info("{} clientes encontrados: nome '{}', pageable '{}'", clientesByNome.getSize(), nome, pageable);
+            log.info("{} clientes encontrados: nome '{}', pageable '{}'", clientesByNome.getTotalElements(), nome, pageable);
             return clientesByNome;
         }
         log.info("Listando clientes: pageable '{}'", pageable);
         Page<Cliente> clientes = clienteRepository.findAll(pageable);
-        log.info("{} clientes encontrados: pageable '{}'", clientes.getSize(), pageable);
+        log.info("{} clientes encontrados: pageable '{}'", clientes.getTotalElements(), pageable);
         return clientes;
     }
 }
