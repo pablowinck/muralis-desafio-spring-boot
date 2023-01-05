@@ -1,6 +1,6 @@
 package com.github.pablowinck.muralisdesafiospringboot.core.usecase;
 
-import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.CadastraClienteDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.PersistClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.events.ClienteCadastradoEvent;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.mapper.ClienteMapper;
 import com.github.pablowinck.muralisdesafiospringboot.outbound.repository.ClienteRepository;
@@ -23,9 +23,9 @@ public class CadastraCliente {
         this.publisher = publisher;
     }
 
-    public void execute(CadastraClienteDto cadastraClienteDto) {
-        log.info("Cadastrando cliente: {}", cadastraClienteDto);
-        var cliente = clienteRepository.save(clienteMapper.toEntity(cadastraClienteDto));
+    public void execute(PersistClienteDto persistClienteDto) {
+        log.info("Cadastrando cliente: {}", persistClienteDto);
+        var cliente = clienteRepository.save(clienteMapper.toEntity(persistClienteDto));
         log.info("Cliente cadastrado com sucesso: {}", cliente);
         publisher.publishEvent(new ClienteCadastradoEvent(cliente));
     }

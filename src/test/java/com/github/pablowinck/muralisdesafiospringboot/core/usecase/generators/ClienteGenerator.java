@@ -1,6 +1,6 @@
 package com.github.pablowinck.muralisdesafiospringboot.core.usecase.generators;
 
-import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.CadastraClienteDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.PersistClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Cliente;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Endereco;
 
@@ -25,8 +25,8 @@ public class ClienteGenerator {
                 .build();
     }
 
-    public static CadastraClienteDto generateCadastraClienteDto() {
-        return CadastraClienteDto.builder()
+    public static PersistClienteDto generatePersistClienteDto() {
+        return PersistClienteDto.builder()
                 .nome(names.get(randomIndex(names.size())))
                 .cep(ceps.get(randomIndex(ceps.size())))
                 .numero(numeros.get(randomIndex(numeros.size())))

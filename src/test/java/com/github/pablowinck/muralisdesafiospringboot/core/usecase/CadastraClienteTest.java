@@ -43,7 +43,7 @@ class CadastraClienteTest {
     @Test
     @DisplayName("Deve cadastrar um cliente")
     void deveCadastrarUmCliente() {
-        var dto = ClienteGenerator.generateCadastraClienteDto();
+        var dto = ClienteGenerator.generatePersistClienteDto();
         cadastraCliente.execute(dto);
         var cliente = clienteRepository.findByNomeLikeIgnoreCase(dto.getNome(), Pageable.unpaged());
         assertTrue(cliente.hasContent());
@@ -56,7 +56,7 @@ class CadastraClienteTest {
     @DisplayName("Deve cadastrar contatos do cliente")
     @Transactional
     void deveCadastrarContatosDoCliente() {
-        var dto = ClienteGenerator.generateCadastraClienteDto();
+        var dto = ClienteGenerator.generatePersistClienteDto();
         var contato = new ContatoDto();
         contato.setTipo("email");
         contato.setTexto("john.doe@email.com");

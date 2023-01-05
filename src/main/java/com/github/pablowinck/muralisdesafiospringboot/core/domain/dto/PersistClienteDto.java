@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CadastraClienteDto {
+public class PersistClienteDto {
     @NotNull(message = "O campo 'nome' é obrigatório")
     @NotBlank(message = "O campo 'nome' não pode ser vazio")
     @Length(min = 3, max = 100, message = "O campo 'nome' deve ter entre 3 e 100 caracteres")

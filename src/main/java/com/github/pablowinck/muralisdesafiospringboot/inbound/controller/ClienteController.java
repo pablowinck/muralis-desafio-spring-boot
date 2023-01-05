@@ -1,6 +1,6 @@
 package com.github.pablowinck.muralisdesafiospringboot.inbound.controller;
 
-import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.CadastraClienteDto;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.PersistClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ListaClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.usecase.CadastraCliente;
 import com.github.pablowinck.muralisdesafiospringboot.core.usecase.ConsultaCliente;
@@ -37,7 +37,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> cadastra(@RequestBody @Valid CadastraClienteDto dto) {
+    public ResponseEntity<?> cadastra(@RequestBody @Valid PersistClienteDto dto) {
         cadastraCliente.execute(dto);
         return ResponseEntity.ok().build();
     }

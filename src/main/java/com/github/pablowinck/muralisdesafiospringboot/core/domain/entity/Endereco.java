@@ -34,6 +34,11 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public void setNumero(String numero) {
+        if (numero.isBlank()) return;
+        this.numero = numero;
+    }
+
     public void setComplemento(String complemento) {
         if (complemento.isBlank()) return;
         this.complemento = complemento;

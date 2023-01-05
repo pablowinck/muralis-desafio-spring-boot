@@ -24,7 +24,7 @@ class MapeiaEnderecoPeloCepClienteTest {
     @Test
     @DisplayName("Deve cadastrar um cliente, e posteriormente consultar o CEP, enriquecendo o endereco")
     void deveCadastrarUmClienteEPesquisarCep() {
-        var dto = ClienteGenerator.generateCadastraClienteDto();
+        var dto = ClienteGenerator.generatePersistClienteDto();
         assertNull(dto.getLogradouro());
         cadastraCliente.execute(dto);
         var cliente = clienteRepository.findByNomeLikeIgnoreCase(dto.getNome(), Pageable.unpaged());

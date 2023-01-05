@@ -1,5 +1,7 @@
 package com.github.pablowinck.muralisdesafiospringboot.core.usecase;
 
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.entity.Cliente;
+import com.github.pablowinck.muralisdesafiospringboot.core.domain.events.ClienteAtualizadoEvent;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.events.ClienteCadastradoEvent;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.mapper.ClienteMapper;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.repository.ViacepRepository;
@@ -26,7 +28,16 @@ public class MapeiaEnderecoPeloCepCliente {
     @EventListener
     @Async
     public void on(ClienteCadastradoEvent event) {
-        var cliente = event.getCliente();
+        this.execute(event.getCliente());
+    }
+
+    @EventListener
+    @Async
+    public void on(ClienteAtualizadoEvent event) {
+        this.execute(event.getCliente());
+    }
+
+    private void execute(Cliente cliente) {
         log.info("Preenchendo endereco do cliente {} pelo CEP: {}", cliente.getId(), cliente.getEndereco().getCep());
         var cep = cliente.getEndereco().getCep();
         var viacepDto = viacepRepository.findByCep(cep);

@@ -24,4 +24,12 @@ public class DomainException extends RuntimeException {
         );
     }
 
+    public static DomainException EX01_NotFound() {
+        return new DomainException(
+                "EX-01",
+                "Recurso não encontrado",
+                HttpStatus.NOT_FOUND
+        );
+    }
+
 }
