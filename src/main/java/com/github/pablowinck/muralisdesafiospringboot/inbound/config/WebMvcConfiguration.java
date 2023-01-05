@@ -1,7 +1,6 @@
 package com.github.pablowinck.muralisdesafiospringboot.inbound.config;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -9,9 +8,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Muralis Desafio Spring Boot", version = "1.0.0", description = "Etapa tecnica do processo seletivo da Muralis"))
 @EnableWebMvc
 @EnableAutoConfiguration
+@Log4j2
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
     public void addCorsMappings(CorsRegistry registry) {
