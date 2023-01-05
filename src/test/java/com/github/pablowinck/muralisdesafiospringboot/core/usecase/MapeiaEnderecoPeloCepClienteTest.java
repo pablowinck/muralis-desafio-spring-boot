@@ -27,7 +27,7 @@ class MapeiaEnderecoPeloCepClienteTest {
         var dto = ClienteGenerator.generatePersistClienteDto();
         assertNull(dto.getLogradouro());
         cadastraCliente.execute(dto);
-        var cliente = clienteRepository.findByNomeLikeIgnoreCase(dto.getNome(), Pageable.unpaged());
+        var cliente = clienteRepository.findByNomeContainingIgnoreCase(dto.getNome(), Pageable.unpaged());
         assertTrue(cliente.hasContent());
         assertNotNull(cliente.getContent().get(0).getEndereco().getLogradouro());
     }

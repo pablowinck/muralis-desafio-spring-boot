@@ -45,7 +45,7 @@ class CadastraClienteTest {
     void deveCadastrarUmCliente() {
         var dto = ClienteGenerator.generatePersistClienteDto();
         cadastraCliente.execute(dto);
-        var cliente = clienteRepository.findByNomeLikeIgnoreCase(dto.getNome(), Pageable.unpaged());
+        var cliente = clienteRepository.findByNomeContainingIgnoreCase(dto.getNome(), Pageable.unpaged());
         assertTrue(cliente.hasContent());
         List<ClienteCadastradoEvent> events = applicationEvents.stream(ClienteCadastradoEvent.class)
                 .toList();
@@ -62,7 +62,7 @@ class CadastraClienteTest {
         contato.setTexto("john.doe@email.com");
         dto.setContatos(List.of(contato));
         cadastraCliente.execute(dto);
-        var cliente = clienteRepository.findByNomeLikeIgnoreCase(dto.getNome(), Pageable.unpaged());
+        var cliente = clienteRepository.findByNomeContainingIgnoreCase(dto.getNome(), Pageable.unpaged());
         assertTrue(cliente.hasContent());
         var firstCliente = cliente.get().findFirst();
         assertTrue(firstCliente.isPresent());

@@ -32,7 +32,7 @@ public class ListaClientes {
     private Page<Cliente> getClientePage(Optional<String> nome, Pageable pageable) {
         if (nome.isPresent()) {
             log.info("Listando clientes: nome '{}', pageable '{}'", nome, pageable);
-            Page<Cliente> clientesByNome = clienteRepository.findByNomeLikeIgnoreCase(nome.get(), pageable);
+            Page<Cliente> clientesByNome = clienteRepository.findByNomeContainingIgnoreCase(nome.get(), pageable);
             log.info("{} clientes encontrados: nome '{}', pageable '{}'", clientesByNome.getTotalElements(), nome, pageable);
             return clientesByNome;
         }
