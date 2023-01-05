@@ -98,4 +98,4 @@ A tecnologia de banco de dados hoje é o h2, mas poderia ser trocada por outro b
 ./mvnw test
 ```
 - Para obter todas requests no seu Postman, basta importar o arquivo:
-**REQUESTS_COLLECTION.json**
+[REQUESTS_COLLECTION.json](https://github.com/pablowinck/muralis-desafio-spring-boot/blob/master/REQUESTS_COLLECTION.json)
