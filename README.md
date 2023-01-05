@@ -62,7 +62,7 @@ class ViacepRepositoryImpl implements ViacepRepository {
 ```
 
 ### Config de Resiliência
-Foi adicionado o retry do resiliencie4j, com a seguinte configuração:
+Foi adicionado o retry do resiliencie4j, para caso erro na chamada do viacep, tentar novamente, o mesmo foi adicionado com a seguinte configuração:
 - maxAttempts: 5
 - waitDuration: 4s
 - exponentialBackoffMultiplier: 2
