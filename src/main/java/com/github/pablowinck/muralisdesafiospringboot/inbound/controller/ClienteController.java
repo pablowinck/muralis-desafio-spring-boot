@@ -2,10 +2,7 @@ package com.github.pablowinck.muralisdesafiospringboot.inbound.controller;
 
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.PersistClienteDto;
 import com.github.pablowinck.muralisdesafiospringboot.core.domain.dto.ListaClienteDto;
-import com.github.pablowinck.muralisdesafiospringboot.core.usecase.AtualizaCliente;
-import com.github.pablowinck.muralisdesafiospringboot.core.usecase.CadastraCliente;
-import com.github.pablowinck.muralisdesafiospringboot.core.usecase.ConsultaCliente;
-import com.github.pablowinck.muralisdesafiospringboot.core.usecase.ListaClientes;
+import com.github.pablowinck.muralisdesafiospringboot.core.usecase.*;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,12 +18,14 @@ public class ClienteController {
     private final ConsultaCliente consultaCliente;
     private final CadastraCliente cadastraCliente;
     private final AtualizaCliente atualizaCliente;
+    private final ExcluiCliente excluiCliente;
 
-    public ClienteController(ListaClientes listaClientes, ConsultaCliente consultaCliente, CadastraCliente cadastraCliente, AtualizaCliente atualizaCliente) {
+    public ClienteController(ListaClientes listaClientes, ConsultaCliente consultaCliente, CadastraCliente cadastraCliente, AtualizaCliente atualizaCliente, ExcluiCliente excluiCliente) {
         this.listaClientes = listaClientes;
         this.consultaCliente = consultaCliente;
         this.cadastraCliente = cadastraCliente;
         this.atualizaCliente = atualizaCliente;
+        this.excluiCliente = excluiCliente;
     }
 
     @GetMapping
@@ -50,4 +49,11 @@ public class ClienteController {
         atualizaCliente.execute(id, dto);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remove(@PathVariable Integer id) {
+        excluiCliente.execute(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
