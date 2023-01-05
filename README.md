@@ -83,7 +83,7 @@ graph TD
 Exemplo de listagem de cliente:
 ```mermaid
 graph TD
-    GET/v1/clientes --> C{ListaClientes\nuse-case}
+    GET/v1/clientes --> C{ListaClientes use-case}
     C -->|ClienteRepository| D[h2]
 ```
 A tecnologia de banco de dados hoje é o h2, mas poderia ser trocada por outro banco de dados, sem afetar a lógica de negócio.
