@@ -97,3 +97,5 @@ A tecnologia de banco de dados hoje é o h2, mas poderia ser trocada por outro b
 ```bash
 ./mvnw test
 ```
+- Para obter todas requests no seu Postman, basta importar o arquivo:
+**REQUESTS_COLLECTION.json**
